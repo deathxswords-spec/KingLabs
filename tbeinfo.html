@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>King Labs Dashboard</title>
+
+  <!-- Pixelated Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #001a00;
+      color: #00ff00;
+      font-family: 'Press Start 2P', monospace;
+      text-shadow: 0 0 4px #00ff00, 0 0 8px #00ff00;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Login Header */
+    .login-header {
+      background-color: #002200;
+      border-bottom: 2px solid #00ff00;
+      color: #00ff00;
+      font-family: 'Press Start 2P', monospace;
+      padding: 10px;
+      text-align: left;
+      font-size: 14px;
+    }
+    .login-header .cursor {
+      display: inline-block;
+      width: 10px;
+      animation: blink 1s steps(2) infinite;
+    }
+    @keyframes blink {
+      0%, 50%, 100% { opacity: 1; }
+      25%, 75% { opacity: 0; }
+    }
+
+    /* Dashboard Navigation */
+    nav.dashboard {
+      background: #002200;
+      border-bottom: 2px solid #00ff00;
+      padding: 10px;
+      text-align: center;
+    }
+    nav.dashboard ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+    nav.dashboard a {
+      color: #00ff00;
+      text-decoration: none;
+      font-family: 'Press Start 2P', monospace;
+      text-shadow: 0 0 4px #00ff00;
+    }
+    nav.dashboard a:hover {
+      color: #0f0;
+      text-shadow: 0 0 8px #00ff00;
+    }
+
+    /* Search Bar */
+    .search-container {
+      text-align: center;
+      margin: 15px 0;
+    }
+    .search-container input {
+      background-color: #002200;
+      border: 2px solid #00ff00;
+      color: #00ff00;
+      font-family: 'Press Start 2P', monospace;
+      padding: 5px 10px;
+      width: 250px;
+      text-shadow: 0 0 4px #00ff00;
+    }
+
+    /* Subject List */
+    #subject-list {
+      list-style: none;
+      padding: 0;
+      text-align: center;
+    }
+    #subject-list li {
+      margin: 5px 0;
+    }
+    #subject-list a {
+      color: #00ff00;
+      text-decoration: none;
+      font-family: 'Press Start 2P', monospace;
+      text-shadow: 0 0 4px #00ff00;
+    }
+    #subject-list a:hover {
+      color: #0f0;
+      text-shadow: 0 0 8px #00ff00;
+    }
+
+    /* Overlay container */
+    .glitch-overlay {
+      pointer-events: none;
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(0,255,0,0.05) 0px,
+        rgba(0,255,0,0.05) 2px,
+        transparent 2px,
+        transparent 4px
+      );
+      animation: flicker 5s infinite;
+    }
+    .glitch-noise {
+      position: absolute;
+      inset: 0;
+      background-image: url("https://media.githubusercontent.com/media/ozgrozer/100dayscss/master/100dayscss/day-047/noise.png");
+      opacity: 0.04;
+      mix-blend-mode: screen;
+      animation: noise-move 1s steps(4) infinite;
+    }
+    @keyframes noise-move {
+      0% { transform: translate(0,0); }
+      25% { transform: translate(-5%, -10%); }
+      50% { transform: translate(5%, 10%); }
+      75% { transform: translate(-10%, 5%); }
+      100% { transform: translate(0,0); }
+    }
+    @keyframes flicker {
+      0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+      20%, 24%, 55% { opacity: 0.6; }
+    }
+    .glitch-flash {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,255,0,0.08);
+      mix-blend-mode: lighten;
+      animation: flash 6s infinite;
+    }
+    @keyframes flash {
+      0%, 90%, 100% { opacity: 0; }
+      92%, 94% { opacity: 0.3; }
+      96% { opacity: 0.15; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Logged in as -->
+  <div class="login-header">
+    <span class="username">Sangria</span> — <span class="role">Administrator</span><span class="cursor">|</span>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="dashboard">
+    <ul>
+      <li><a href="index.html">Dashboard</a></li>
+    <li><a href="KLSinfo.html">Staff & Faculty Members</a></li>
+    <li><a href="tpeinfo.html">The Prototype Experiments</a></li>
+    <li><a href="tg1einfo.html">The Generation 1 Experiments</a></li>
+    <li><a href="tbeinfo.html">The Blaze Experiments</a></li>
+    <li><a href="tfeinfo.html">The Fusion Experiments</a></li>
+    <li><a href="tbaeinfo.html">The Bio-Armor Experiments</a></li>
+    <li><a href="tkeinfo.html">The King Experiments</a></li>
+    </ul>
+  </nav>
+
+  <!-- Search -->
+  <div class="search-container">
+    <input type="text" id="search" placeholder="Search subjects...">
+  </div>
+
+  <ul id="subject-list">
+    <li><a href="KLSinfo.html">Staff & Faculty Members</a></li>
+    <li><a href="tpeinfo.html">The Prototype Experiments</a></li>
+    <li><a href="tg1einfo.html">The Generation 1 Experiments</a></li>
+    <li><a href="tbeinfo.html">The Blaze Experiments</a></li>
+    <li><a href="tfeinfo.html">The Fusion Experiments</a></li>
+    <li><a href="tbaeinfo.html">The Bio-Armor Experiments</a></li>
+    <li><a href="tkeinfo.html">The King Experiments</a></li>
+  </ul>
+
+  <!-- Overlay -->
+  <div class="glitch-overlay">
+    <div class="glitch-noise"></div>
+    <div class="glitch-flash"></div>
+  </div>
+
+  <script>
+    const search = document.getElementById('search');
+    const listItems = document.getElementById('subject-list').getElementsByTagName('li');
+
+    search.addEventListener('keyup', function() {
+      const filter = search.value.toLowerCase();
+      for (let i = 0; i < listItems.length; i++) {
+        let text = listItems[i].textContent.toLowerCase();
+        listItems[i].style.display = text.includes(filter) ? '' : 'none';
+      }
+    });
+  </script>
+</body>
+</html>
+

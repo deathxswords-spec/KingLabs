@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>King Labs Database - Login</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+  body {
+    background-color: #001a00;
+    color: #00ff00;
+    font-family: 'Press Start 2P', monospace;
+    text-shadow: 0 0 4px #00ff00, 0 0 8px #00ff00;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+  }
+
+  #boot-text, #login-container {
+    white-space: pre-line;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  input[type="password"], input[type="text"] {
+    background-color: #002200;
+    border: 2px solid #00ff00;
+    color: #00ff00;
+    font-family: 'Press Start 2P', monospace;
+    padding: 10px;
+    width: 250px;
+    text-align: center;
+    text-shadow: 0 0 4px #00ff00;
+  }
+
+  input[type="submit"], #toggle-password {
+    margin-top: 10px;
+    background-color: #002200;
+    border: 2px solid #00ff00;
+    color: #00ff00;
+    font-family: 'Press Start 2P', monospace;
+    padding: 10px 20px;
+    cursor: pointer;
+    text-shadow: 0 0 4px #00ff00;
+    transition: all 0.2s;
+  }
+
+  input[type="submit"]:hover, #toggle-password:hover {
+    color: #0f0;
+    text-shadow: 0 0 8px #00ff00;
+  }
+
+  #toggle-password {
+    display: inline-block;
+    margin-left: 10px;
+  }
+
+  .hidden { display: none; }
+
+  /* Glitch overlay */
+  .glitch-overlay {
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(0,255,0,0.05) 0px,
+      rgba(0,255,0,0.05) 2px,
+      transparent 2px,
+      transparent 4px
+    );
+    animation: flicker 5s infinite;
+  }
+  .glitch-noise {
+    position: absolute;
+    inset: 0;
+    background-image: url("https://media.githubusercontent.com/media/ozgrozer/100dayscss/master/100dayscss/day-047/noise.png");
+    opacity: 0.04;
+    mix-blend-mode: screen;
+    animation: noise-move 1s steps(4) infinite;
+  }
+  @keyframes noise-move {
+    0% { transform: translate(0,0); }
+    25% { transform: translate(-5%, -10%); }
+    50% { transform: translate(5%, 10%); }
+    75% { transform: translate(-10%, 5%); }
+    100% { transform: translate(0,0); }
+  }
+  @keyframes flicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+    20%, 24%, 55% { opacity: 0.6; }
+  }
+</style>
+</head>
+<body>
+
+<div id="boot-text">
+Initializing King Labs Database...
+</div>
+
+<div id="login-container" class="hidden">
+  <div>Sangria, please enter your password:</div>
+  <form id="login-form">
+    <input type="password" id="password" placeholder="Password" required>
+    <button type="button" id="toggle-password">Show</button><br>
+    <input type="submit" value="Login">
+  </form>
+  <div id="error-msg" style="color:red; margin-top:10px;"></div>
+</div>
+
+<div class="glitch-overlay">
+  <div class="glitch-noise"></div>
+</div>
+
+<script>
+const bootText = document.getElementById('boot-text');
+const loginContainer = document.getElementById('login-container');
+const loginForm = document.getElementById('login-form');
+const errorMsg = document.getElementById('error-msg');
+
+const toggleBtn = document.getElementById('toggle-password');
+const passwordInput = document.getElementById('password');
+
+// Toggle password visibility
+toggleBtn.addEventListener('click', () => {
+  if (passwordInput.type === 'password') {
+    passwordInput.type = 'text';
+    toggleBtn.textContent = 'Hide';
+  } else {
+    passwordInput.type = 'password';
+    toggleBtn.textContent = 'Show';
+  }
+});
+
+// Boot sequence simulation
+let bootLines = [
+  "Booting King Labs Database...",
+  "Loading experimental profiles...",
+  "Initializing secure access protocols...",
+  "System ready."
+];
+
+let i = 0;
+function showNextLine() {
+  if (i < bootLines.length) {
+    bootText.textContent += "\n" + bootLines[i];
+    i++;
+    setTimeout(showNextLine, 1000);
+  } else {
+    setTimeout(() => {
+      bootText.classList.add('hidden');
+      loginContainer.classList.remove('hidden');
+    }, 500);
+  }
+}
+
+showNextLine();
+
+// Login handler
+loginForm.addEventListener('submit', function(e){
+  e.preventDefault();
+  const password = passwordInput.value;
+  if(password === "Hizumi-Sucks!"){ // your password
+    window.location.href = "index.html";
+  } else {
+    errorMsg.textContent = "Incorrect password. Try again.";
+  }
+});
+</script>
+</body>
+</html>
+
